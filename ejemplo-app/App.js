@@ -1,10 +1,13 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, TouchableOpacity,StyleSheet, Text, View, ImageBackground, SafeAreaView, TextInput, Button, Alert } from 'react-native';
+import { Pressable, StyleSheet, Text, View, ImageBackground, SafeAreaView, TextInput } from 'react-native';
 const imagenCoca = require('./assets/imgs/cocaLogo.png');
 export default function App() {
   const [nombre, handleNombreChange] = React.useState(``)
-  const [contrasena, handleContrasenaChange] = React.useState(``)
+  const [contrasena, setContrasena] = React.useState('');
+  const handleContrasenaChange = (text) => {
+    setContrasena(text);
+  };
 return (
     <SafeAreaView style={{flex:1}}>
     <View style={styles.app}>
@@ -28,11 +31,8 @@ return (
         <TextInput
         style = {styles.input}
         placeholder='Ingrese su contraseña'
-        onChangeText={(text) => {
-          handleContrasenaChange(text);
-        }}
-        secureTextEntry={true}
-        value={contrasena}
+        onChangeText={handleContrasenaChange}
+        value={contrasena.replace(/./g, '★')}
         />
     <View style={styles.container}>
       <Pressable
