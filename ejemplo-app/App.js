@@ -1,7 +1,10 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ImageBackground, SafeAreaView } from 'react-native';
-const imagenCoca = {uri: "./assets/imgs/cocaLogo.png"}
+import { Pressable, TouchableOpacity,StyleSheet, Text, View, ImageBackground, SafeAreaView, TextInput, Button, Alert } from 'react-native';
+const imagenCoca = require('./assets/imgs/cocaLogo.png');
 export default function App() {
+  const [nombre, handleNombreChange] = React.useState(``)
+  const [contrasena, handleContrasenaChange] = React.useState(``)
 return (
     <SafeAreaView style={{flex:1}}>
     <View style={styles.app}>
@@ -10,13 +13,41 @@ return (
         <Text style={styles.textHeader}>Login App (Torchinsky, Frankenthal y Paterno)</Text>
       </View>
       <View style = {styles.body}>
-        <ImageBackground
-          source={imagenCoca}
-          resizeMode='cover'>
-          <Text>aaaaa</Text>
-        </ImageBackground>
+      <ImageBackground
+        style= {styles.image}
+        source={imagenCoca}
+        resizeMode='contain'>
+      </ImageBackground>
+      <View style = {styles.form}>
+        <TextInput
+        style = {styles.input}
+        placeholder='Ingrese su email'
+        onChangeText={handleNombreChange}
+        value={nombre}
+        />
+        <TextInput
+        style = {styles.input}
+        placeholder='Ingrese su contraseña'
+        onChangeText={(text) => {
+          handleContrasenaChange(text);
+        }}
+        secureTextEntry={true}
+        value={contrasena}
+        />
+    <View style={styles.container}>
+      <Pressable
+        style={styles.button}
+        onPress={() => alert('¡Botón presionado!')}
+      >
+        <Text style={styles.buttonText}>INGRESAR</Text>
+      </Pressable>
+      <Text style={styles.text}>Olvidaste la clave?</Text>
+      <Text style={styles.text}>Crear Cuenta</Text>
+    </View>
       </View>
-      <View style = {styles.footer}></View>
+      </View>
+      <View style = {styles.footer}>
+      </View>
     </View>
     </SafeAreaView>
   );
@@ -26,25 +57,61 @@ const styles = StyleSheet.create({
   app: {
     flexDirection: 'col',
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'snow',
     justifyContent: 'center'
   },
   header:{
-    flex: 0.7,
+    flex: 0.3,
     backgroundColor: 'violet',
     justifyContent: 'center'
   },
   textHeader:{
     textAlign: 'center',
     color: 'snow',
-    fontSize: '16'
-  },
-  body:{
-    flex: 5,
-    backgroundColor: 'snow'
+    fontSize: 18
   },
   footer:{
-    flex: 2,
-    backgroundColor: 'gray'
+    flex: 0.5,
+    backgroundColor: 'violet'
   },
+  image:{
+    flex: 2.5,
+    margin: 20,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  body:{
+    flex: 3,
+  },
+  form:{
+    flex: 3,
+    margin: 15,
+  },
+  input:{
+    marginTop: 10,
+    height: 50,
+    borderWidth: 2,
+    padding: 1, 
+    borderColor: 'violet',
+    borderRadius: 5,
+  },
+  container: {
+    flex: 1,
+    justifyContent: `center`,
+    alignItems: 'center'
+  },
+  button: {
+    backgroundColor: 'violet',
+    paddingHorizontal: 143,
+    paddingVertical: 16,
+    borderRadius: 5
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18
+  },
+  text:{
+    marginTop: 15,
+    fontSize: 16
+  }
 });
