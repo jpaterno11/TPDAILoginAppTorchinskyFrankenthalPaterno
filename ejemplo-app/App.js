@@ -1,8 +1,11 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View, ImageBackground, SafeAreaView, TextInput } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
 const imagenCoca = require('./assets/imgs/cocaLogo.png');
+SplashScreen.preventAutoHideAsync();
 export default function App() {
+  SplashScreen.hideAsync();
   const [nombre, handleNombreChange] = React.useState(``)
   const [contrasena, setContrasena] = React.useState('');
   const handleContrasenaChange = (text) => {
